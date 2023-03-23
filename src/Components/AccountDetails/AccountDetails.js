@@ -36,8 +36,12 @@ const AccountDetails = () => {
           }}
         ></Avatar>
 
-        <Typography>Dinesh Somaraju</Typography>
-        <Typography fontSize="12px" color="#878787">
+        <Typography sx={{ textAlign: 'center' }}>Dinesh Somaraju</Typography>
+        <Typography
+          fontSize="12px"
+          color="#878787"
+          sx={{ textAlign: 'center' }}
+        >
           dinesh.somaraju
         </Typography>
 
