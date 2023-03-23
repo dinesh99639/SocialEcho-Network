@@ -1,24 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  value: 0,
+  users: [
+    { username: 'anonymous', name: 'Anonymous' },
+    { username: 'vandhana.ram', name: 'Vandhana Ram' },
+    { username: 'anjali.vanga', name: 'Anjali Vanga' },
+    { username: 'shristhi.singh', name: 'Shrishti Singh' },
+  ],
 };
 
 const database = createSlice({
   name: 'database',
   initialState: initialState,
 
-  reducers: {
-    increment: (state) => {
-      state.value += 1;
-    },
-    incrementByValue: (state, { payload }) => {
-      state.value += payload;
-    },
-    decrement: (state) => {
-      state.value -= 1;
-    },
-  },
+  reducers: {},
 });
 
 export default database;
