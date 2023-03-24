@@ -11,7 +11,6 @@ import {
   Button,
 } from '@mui/material';
 
-import database from '../../Store/Reducers/database';
 import application from '../../Store/Reducers/application';
 
 const SwitchAccount = (props) => {

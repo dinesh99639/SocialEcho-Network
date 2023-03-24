@@ -1,6 +1,7 @@
 import { Grid } from '@mui/material';
 
 import AccountDetails from '../AccountDetails/AccountDetails';
+import Contacts from '../Contacts/Contacts';
 
 const Dashboard = () => {
   return (
@@ -25,7 +26,7 @@ const Dashboard = () => {
           md={3}
           sx={{ display: { xs: 'none', sm: 'none', md: 'block' } }}
         >
-          R
+          <Contacts />
         </Grid>
       </Grid>
     </>
