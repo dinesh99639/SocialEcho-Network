@@ -18,7 +18,14 @@ import application from '../../Store/Reducers/application';
 
 const SwitchAccount = (props) => {
   const [selectedUser, setSelectedUser] = useState(null);
-  const [newUser, setNewUser] = useState({ username: '', name: '' });
+  const [newUser, setNewUser] = useState({
+    username: '',
+    name: '',
+    totalPosts: 0,
+    totalLikes: 0,
+    lastPostedTimestamp: 0,
+    dailyStreaks: 0,
+  });
 
   const snackbar = useContext(SnackbarContext);
 
@@ -40,11 +47,13 @@ const SwitchAccount = (props) => {
     );
     if (existingUsers.length === 0) {
       props.addUser(newUser);
+      props.changeUser(newUser);
       snackbar.setSnack({
         open: true,
         type: 'success',
         message: 'Registration successful',
       });
+      props.handleClose();
     } else {
       snackbar.setSnack({
         open: true,

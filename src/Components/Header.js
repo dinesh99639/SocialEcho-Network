@@ -96,6 +96,6 @@ const Header = (props) => {
 const mapStateToProps = (state) => {
   const { application } = state;
 
-  return { currentUser: application.user };
+  return { currentUser: application.currentUser };
 };
 export default connect(mapStateToProps)(Header);

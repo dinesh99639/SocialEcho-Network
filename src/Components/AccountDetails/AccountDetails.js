@@ -6,8 +6,14 @@ import VrpanoIcon from '@mui/icons-material/Vrpano';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 
+import getLastPostedDaysBack from '../../Utils/getLastPostedDaysBack';
+
 const AccountDetails = (props) => {
   const { currentUser } = props;
+
+  const lastPostedDaysBack = getLastPostedDaysBack(
+    currentUser.lastPostedTimestamp,
+  );
 
   return (
     <Box sx={{ padding: '20px' }}>
@@ -65,7 +71,7 @@ const AccountDetails = (props) => {
               <Tooltip title="Posts" placement="top">
                 <VrpanoIcon sx={{ fontSize: '30px', color: '#4095ff' }} />
               </Tooltip>
-              <Typography fontSize="14px">10</Typography>
+              <Typography fontSize="14px">{currentUser.totalPosts}</Typography>
             </Grid>
             <Grid
               item
@@ -79,7 +85,7 @@ const AccountDetails = (props) => {
               <Tooltip title="Likes" placement="top">
                 <FavoriteIcon sx={{ fontSize: '30px', color: '#ff008c' }} />
               </Tooltip>
-              <Typography fontSize="14px">176</Typography>
+              <Typography fontSize="14px">{currentUser.totalLikes}</Typography>
             </Grid>
             <Grid
               item
@@ -92,9 +98,16 @@ const AccountDetails = (props) => {
               }}
             >
               <Tooltip title="Daily streak" placement="top">
-                <WhatshotIcon sx={{ fontSize: '30px', color: '#ffa500' }} />
+                <WhatshotIcon
+                  sx={{
+                    fontSize: '30px',
+                    color: lastPostedDaysBack === 0 ? '#ffa500' : '#adadad',
+                  }}
+                />
               </Tooltip>
-              <Typography fontSize="14px">12</Typography>
+              <Typography fontSize="14px">
+                {lastPostedDaysBack < 2 ? currentUser.dailyStreaks : 0}
+              </Typography>
             </Grid>
           </Grid>
         </Box>
@@ -106,7 +119,7 @@ const AccountDetails = (props) => {
 const mapStateToProps = (state) => {
   const { application } = state;
 
-  return { currentUser: application.user };
+  return { currentUser: application.currentUser };
 };
 
 export default connect(mapStateToProps)(AccountDetails);

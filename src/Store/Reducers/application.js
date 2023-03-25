@@ -1,9 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: {
+  currentUser: {
     username: 'anonymous',
     name: 'Anonymous',
+    totalPosts: 10,
+    totalLikes: 176,
+    lastPostedTimestamp: 1679737697241,
+    dailyStreaks: 10,
   },
 };
 
@@ -13,8 +17,7 @@ const database = createSlice({
 
   reducers: {
     changeUser: (state, { payload }) => {
-      state.user.username = payload.username;
-      state.user.name = payload.name;
+      state.currentUser = payload;
     },
   },
 });
