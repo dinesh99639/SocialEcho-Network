@@ -7,6 +7,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 
 const Contacts = (props) => {
   const contacts = props.allUsers;
+  const currentUser = props.currentUser;
 
   return (
     <Box sx={{ padding: '20px' }}>
@@ -32,57 +33,59 @@ const Contacts = (props) => {
         </Typography>
 
         <Box>
-          {contacts.map((contact) => (
-            <Box
-              key={contact.username}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                padding: '5px 13px',
-                borderTop: '1px solid',
-                columnGap: '10px',
-              }}
-            >
-              <Box sx={{ '& div': { height: '28px' } }}>
-                <Jdenticon size="28" value={contact.name} />
-              </Box>
+          {contacts
+            .filter((contact) => contact.username !== currentUser.username)
+            .map((contact) => (
               <Box
+                key={contact.username}
                 sx={{
                   display: 'flex',
-                  flexDirection: 'column',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  width: '15rem',
+                  alignItems: 'center',
+                  padding: '5px 13px',
+                  borderTop: '1px solid',
+                  columnGap: '10px',
                 }}
               >
-                <Typography variant="div" noWrap>
-                  {contact.name}
-                </Typography>
-                <Typography
-                  variant="div"
-                  fontSize="13px"
-                  color="#919191"
-                  noWrap
-                >
-                  {contact.username}
-                </Typography>
-              </Box>
-              <Box sx={{ marginLeft: 'auto', textAlign: 'right' }}>
-                <Tooltip
-                  title="Daily streak"
-                  placement="left"
-                  PopperProps={{
-                    modifiers: [
-                      { name: 'offset', options: { offset: [0, -10] } },
-                    ],
+                <Box sx={{ '& div': { height: '28px' } }}>
+                  <Jdenticon size="28" value={contact.name} />
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    width: '15rem',
                   }}
                 >
-                  <WhatshotIcon sx={{ fontSize: '20px', color: '#ffa500' }} />
-                </Tooltip>
-                <Typography fontSize="12px">176</Typography>
+                  <Typography variant="div" noWrap>
+                    {contact.name}
+                  </Typography>
+                  <Typography
+                    variant="div"
+                    fontSize="13px"
+                    color="#919191"
+                    noWrap
+                  >
+                    {contact.username}
+                  </Typography>
+                </Box>
+                <Box sx={{ marginLeft: 'auto', textAlign: 'right' }}>
+                  <Tooltip
+                    title="Daily streak"
+                    placement="left"
+                    PopperProps={{
+                      modifiers: [
+                        { name: 'offset', options: { offset: [0, -10] } },
+                      ],
+                    }}
+                  >
+                    <WhatshotIcon sx={{ fontSize: '20px', color: '#ffa500' }} />
+                  </Tooltip>
+                  <Typography fontSize="12px">176</Typography>
+                </Box>
               </Box>
-            </Box>
-          ))}
+            ))}
         </Box>
       </Paper>
     </Box>
@@ -90,9 +93,9 @@ const Contacts = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { database } = state;
+  const { database, application } = state;
 
-  return { allUsers: database.users };
+  return { allUsers: database.users, currentUser: application.user };
 };
 
 export default connect(mapStateToProps)(Contacts);
