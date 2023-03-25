@@ -1,4 +1,5 @@
 import ReduxPersist from './Store/ReduxPersist';
+import SnackBar from './Contexts/Snackbar';
 
 import Header from './Components/Header';
 import Dashboard from './Components/Dashboard/Dashboard';
@@ -6,8 +7,10 @@ import Dashboard from './Components/Dashboard/Dashboard';
 function App() {
   return (
     <ReduxPersist>
-      <Header />
-      <Dashboard />
+      <SnackBar>
+        <Header />
+        <Dashboard />
+      </SnackBar>
     </ReduxPersist>
   );
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { connect } from 'react-redux';
 
 import {
@@ -11,17 +11,27 @@ import {
   Button,
 } from '@mui/material';
 
+import { SnackbarContext } from '../../Contexts/Snackbar';
+
 import database from '../../Store/Reducers/database';
 import application from '../../Store/Reducers/application';
 
 const SwitchAccount = (props) => {
   const [selectedUser, setSelectedUser] = useState(null);
-
   const [newUser, setNewUser] = useState({ username: '', name: '' });
+
+  const snackbar = useContext(SnackbarContext);
 
   const handleLogin = () => {
     props.changeUser(selectedUser);
+    setSelectedUser(null);
     props.handleClose();
+
+    snackbar.setSnack({
+      open: true,
+      type: 'success',
+      message: 'Login successful',
+    });
   };
 
   const handleRegister = () => {
@@ -30,8 +40,17 @@ const SwitchAccount = (props) => {
     );
     if (existingUsers.length === 0) {
       props.addUser(newUser);
+      snackbar.setSnack({
+        open: true,
+        type: 'success',
+        message: 'Registration successful',
+      });
     } else {
-      console.log('User already exists');
+      snackbar.setSnack({
+        open: true,
+        type: 'error',
+        message: 'User already exists',
+      });
     }
   };
 
@@ -73,7 +92,6 @@ const SwitchAccount = (props) => {
               disablePortal
               options={props.allUsers}
               getOptionLabel={(option) => option?.name ?? ''}
-              inputValue={selectedUser?.name ?? ''}
               onChange={(e, values) => setSelectedUser(values)}
               renderInput={(params) => (
                 <TextField {...params} label="User" variant="standard" />
