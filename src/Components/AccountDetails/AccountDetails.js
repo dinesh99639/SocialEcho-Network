@@ -1,10 +1,14 @@
+import { connect } from 'react-redux';
+
 import { Avatar, Box, Grid, Paper, Tooltip, Typography } from '@mui/material';
 
 import VrpanoIcon from '@mui/icons-material/Vrpano';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 
-const AccountDetails = () => {
+const AccountDetails = (props) => {
+  const { currentUser } = props;
+
   return (
     <Box sx={{ padding: '20px' }}>
       <Paper
@@ -36,13 +40,13 @@ const AccountDetails = () => {
           }}
         ></Avatar>
 
-        <Typography sx={{ textAlign: 'center' }}>Dinesh Somaraju</Typography>
+        <Typography sx={{ textAlign: 'center' }}>{currentUser.name}</Typography>
         <Typography
           fontSize="12px"
           color="#878787"
           sx={{ textAlign: 'center' }}
         >
-          dinesh.somaraju
+          {currentUser.username}
         </Typography>
 
         <Box sx={{ margin: '5px', width: '100%', textAlign: 'center' }}>
@@ -99,4 +103,10 @@ const AccountDetails = () => {
   );
 };
 
-export default AccountDetails;
+const mapStateToProps = (state) => {
+  const { application } = state;
+
+  return { currentUser: application.user };
+};
+
+export default connect(mapStateToProps)(AccountDetails);
