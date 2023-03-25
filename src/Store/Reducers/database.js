@@ -13,7 +13,11 @@ const database = createSlice({
   name: 'database',
   initialState: initialState,
 
-  reducers: {},
+  reducers: {
+    addUser: (state, { payload }) => {
+      state.users.push(payload);
+    },
+  },
 });
 
 export default database;

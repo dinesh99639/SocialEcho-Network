@@ -12,7 +12,7 @@ import {
   MenuItem,
 } from '@mui/material';
 
-import SwitchAccount from './Accounts/SwitchAccount';
+import SwitchAccount from './SwitchAccount/SwitchAccount';
 
 const Header = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);

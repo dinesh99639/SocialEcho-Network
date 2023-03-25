@@ -11,14 +11,28 @@ import {
   Button,
 } from '@mui/material';
 
+import database from '../../Store/Reducers/database';
 import application from '../../Store/Reducers/application';
 
 const SwitchAccount = (props) => {
   const [selectedUser, setSelectedUser] = useState(null);
 
+  const [newUser, setNewUser] = useState({ username: '', name: '' });
+
   const handleLogin = () => {
     props.changeUser(selectedUser);
     props.handleClose();
+  };
+
+  const handleRegister = () => {
+    const existingUsers = props.allUsers.filter(
+      (user) => user.username === newUser.username,
+    );
+    if (existingUsers.length === 0) {
+      props.addUser(newUser);
+    } else {
+      console.log('User already exists');
+    }
   };
 
   return (
@@ -95,10 +109,27 @@ const SwitchAccount = (props) => {
             <Typography variant="h6" component="h2">
               Register
             </Typography>
-            <TextField label="Username" variant="standard" />
-            <TextField label="Name" variant="standard" />
+            <TextField
+              label="Username"
+              variant="standard"
+              onChange={(e) =>
+                setNewUser((prev) => ({ ...prev, username: e.target.value }))
+              }
+            />
+            <TextField
+              label="Name"
+              variant="standard"
+              onChange={(e) =>
+                setNewUser((prev) => ({ ...prev, name: e.target.value }))
+              }
+            />
 
-            <Button size="small" variant="contained">
+            <Button
+              size="small"
+              variant="contained"
+              onClick={handleRegister}
+              disabled={!newUser.username || !newUser.name}
+            >
               Register
             </Button>
           </Grid>
@@ -116,6 +147,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   changeUser: application.actions.changeUser,
+  addUser: database.actions.addUser,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SwitchAccount);
