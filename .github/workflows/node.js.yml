@@ -5,7 +5,7 @@ name: Node.js CI
 
 on:
   push:
-    branches: ["production"]
+    branches: ['production']
 
 permissions: write-all
 
@@ -24,7 +24,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
+          cache: 'npm'
 
       - name: Installing dependencies
         uses: borales/actions-yarn@v3.0.0
@@ -41,6 +41,6 @@ jobs:
         env:
           REPO: self
           BRANCH: production-build # The branch name where you want to push the assets
-          FOLDER: dist
+          FOLDER: build
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           # MESSAGE: "Build: ({sha}) {msg}" # The commit message
