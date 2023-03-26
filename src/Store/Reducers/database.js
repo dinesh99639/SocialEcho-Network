@@ -26,7 +26,7 @@ const initialState = {
       name: 'Anjali Vanga',
       totalPosts: 1,
       totalLikes: 1,
-      lastPostedTimestamp: 1679737697241,
+      lastPostedTimestamp: 1679845120539,
       dailyStreaks: 1,
     },
     1679737567244: {
