@@ -27,7 +27,7 @@ const NewReply = (props) => {
       parentPostId,
       parentReplyId,
       userId: currentUser.id,
-      content: content,
+      content: content.trim(),
       likes: [],
       replies: [],
     };

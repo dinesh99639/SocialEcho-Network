@@ -33,7 +33,7 @@ const NewPost = (props) => {
       postedTimestamp: postId,
       userId: currentUser.id,
       imageURL: imageURL,
-      content: content,
+      content: content.trim(),
       likes: [],
       replies: [],
     });

@@ -14,10 +14,10 @@ import {
   MenuItem,
 } from '@mui/material';
 
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ReplyIcon from '@mui/icons-material/Reply';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 import database from '../../../Store/Reducers/database';
 
@@ -112,7 +112,7 @@ const ReplyContent = (props) => {
 
     updateReply({
       id: reply.id,
-      content,
+      content: content.trim(),
     });
     setIsEditMode(false);
   };

@@ -15,7 +15,7 @@ import {
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
-import AddCommentIcon from '@mui/icons-material/AddComment';
+import ReplyIcon from '@mui/icons-material/Reply';
 
 import database from '../../../Store/Reducers/database';
 
@@ -165,18 +165,11 @@ const PostActions = (props) => {
           <Typography fontSize="12px">{replies.length}</Typography>
         </Box>
 
-        <Box sx={{ marginLeft: 'auto' }}>
-          <Tooltip title="Add Comment">
-            <IconButton onClick={() => setShowAddComment((prev) => !prev)}>
-              <AddCommentIcon
-                sx={{
-                  fontSize: '15px',
-                  scale: '1.2',
-                  color: showAddComment ? '#0184c7' : undefined,
-                }}
-              />
-            </IconButton>
-          </Tooltip>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <IconButton onClick={() => setShowAddComment((prev) => !prev)}>
+            <ReplyIcon sx={{ fontSize: '17px', scale: '1.1' }} />
+          </IconButton>
+          <Typography fontSize="14px">Reply</Typography>
         </Box>
       </Box>
 

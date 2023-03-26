@@ -19,7 +19,7 @@ const PostContent = (props) => {
     updatePost({
       id: props.postId,
       imageURL,
-      content,
+      content: content.trim(),
     });
     setIsEditMode(false);
   };
