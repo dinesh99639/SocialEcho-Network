@@ -209,7 +209,14 @@ const ShowMoreCommentsButton = (props) => {
 };
 
 const Post = (props) => {
-  const { post, users, currentUser, addLikeToPost, removeLikeFromPost } = props;
+  const {
+    post,
+    users,
+    replies,
+    currentUser,
+    addLikeToPost,
+    removeLikeFromPost,
+  } = props;
 
   const [isEditMode, setIsEditMode] = useState(false);
   const [showAllComments, setShowAllComments] = useState(false);
@@ -242,10 +249,14 @@ const Post = (props) => {
         />
 
         <Replies replyIds={post.replies} showAllComments={showAllComments} />
-        <ShowMoreCommentsButton
-          showAllComments={showAllComments}
-          setShowAllComments={setShowAllComments}
-        />
+        {(post.replies.length > 1 ||
+          (post.replies.length === 1 &&
+            replies[post.replies[0]].replies.length > 0)) && (
+          <ShowMoreCommentsButton
+            showAllComments={showAllComments}
+            setShowAllComments={setShowAllComments}
+          />
+        )}
       </Paper>
     </Box>
   );
@@ -254,7 +265,11 @@ const Post = (props) => {
 const mapStateToProps = (state) => {
   const { database, application } = state;
 
-  return { users: database.users, currentUser: application.currentUser };
+  return {
+    users: database.users,
+    replies: database.replies,
+    currentUser: application.currentUser,
+  };
 };
 
 const mapDispatchToProps = {
