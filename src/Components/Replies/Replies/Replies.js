@@ -219,8 +219,12 @@ const Reply = (props) => {
     <Box>
       <Grid container>
         <Grid item xs={1}>
-          <Box sx={{ textAlign: 'center', padding: '7px 0' }}>
-            <Jdenticon size="28" value={users[reply.userId].name} />
+          <Box
+            sx={{ display: 'flex', justifyContent: 'center', padding: '7px 0' }}
+          >
+            <Box sx={{ width: { xs: '15px', sm: '28px' } }}>
+              <Jdenticon size="100%" value={users[reply.userId].name} />
+            </Box>
           </Box>
         </Grid>
         <Grid item xs={11}>
