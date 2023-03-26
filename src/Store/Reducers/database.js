@@ -118,14 +118,15 @@ const database = createSlice({
       let toBeDeletedNext = [];
 
       while (remainingIds.length !== 0) {
-        remainingIds.forEach((replyId) => {
+        for (let i = 0; i < remainingIds.length; i++) {
+          const replyId = remainingIds[i];
           const currentReply = state.replies[replyId];
 
           toBeDeletedNext.push(...currentReply.replies);
           state.users[currentReply.userId].totalLikes -=
             currentReply.likes.length;
           delete state.replies[replyId];
-        });
+        }
 
         remainingIds = toBeDeletedNext;
         toBeDeletedNext = [];
@@ -170,14 +171,15 @@ const database = createSlice({
       let toBeDeletedNext = [];
 
       while (remainingIds.length !== 0) {
-        remainingIds.forEach((replyId) => {
+        for (let i = 0; i < remainingIds.length; i++) {
+          const replyId = remainingIds[i];
           const currentReply = state.replies[replyId];
 
           toBeDeletedNext.push(...currentReply.replies);
           state.users[currentReply.userId].totalLikes -=
             currentReply.likes.length;
           delete state.replies[replyId];
-        });
+        }
 
         remainingIds = toBeDeletedNext;
         toBeDeletedNext = [];
