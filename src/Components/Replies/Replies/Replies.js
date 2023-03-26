@@ -197,6 +197,7 @@ const Reply = (props) => {
     removeLikeFromReply,
     updateReply,
     deleteReply,
+    showAllComments,
   } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -302,7 +303,7 @@ const Reply = (props) => {
             removeLikeFromReply={removeLikeFromReply}
           />
 
-          {!!reply.replies.length && (
+          {!!reply.replies.length && showAllComments && (
             <Box>
               <Replies
                 users={users}
@@ -339,7 +340,12 @@ const Replies = (props) => {
     removeLikeFromReply,
     updateReply,
     deleteReply,
+    showAllComments,
   } = props;
+
+  const filteredReplyIds = showAllComments
+    ? replyIds
+    : (replyIds.length !== 0 && [replyIds[0]]) || [];
 
   return (
     <Box
@@ -350,7 +356,7 @@ const Replies = (props) => {
         rowGap: '10px',
       }}
     >
-      {replyIds.map((replyId) => {
+      {filteredReplyIds.map((replyId) => {
         const reply = replies[replyId];
 
         return (
@@ -364,6 +370,7 @@ const Replies = (props) => {
             removeLikeFromReply={removeLikeFromReply}
             updateReply={updateReply}
             deleteReply={deleteReply}
+            showAllComments={showAllComments}
           />
         );
       })}

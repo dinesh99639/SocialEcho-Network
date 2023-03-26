@@ -16,6 +16,8 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import ReplyIcon from '@mui/icons-material/Reply';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
 import database from '../../../Store/Reducers/database';
 
@@ -110,6 +112,7 @@ const PostActions = (props) => {
     currentUser,
     addLikeToPost,
     removeLikeFromPost,
+    setShowAllComments,
   } = props;
 
   const [showAddComment, setShowAddComment] = useState(false);
@@ -156,7 +159,7 @@ const PostActions = (props) => {
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <Tooltip title="Show all comments">
-            <IconButton>
+            <IconButton onClick={() => setShowAllComments((prev) => !prev)}>
               <ChatBubbleOutlineOutlinedIcon
                 sx={{ fontSize: '15px', scale: '1.2', color: '#0184c7' }}
               />
@@ -185,10 +188,31 @@ const PostActions = (props) => {
   );
 };
 
+const ShowMoreCommentsButton = (props) => {
+  const { showAllComments, setShowAllComments } = props;
+
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        padding: '3px 0',
+        borderTop: '1px solid lightgray',
+      }}
+      onClick={() => setShowAllComments((prev) => !prev)}
+    >
+      <Typography>Show {showAllComments ? 'less' : 'more'} comments</Typography>
+      {showAllComments ? <KeyboardArrowUpIcon /> : <ExpandMoreIcon />}
+    </Box>
+  );
+};
+
 const Post = (props) => {
   const { post, users, currentUser, addLikeToPost, removeLikeFromPost } = props;
 
   const [isEditMode, setIsEditMode] = useState(false);
+  const [showAllComments, setShowAllComments] = useState(false);
 
   return (
     <Box>
@@ -214,8 +238,14 @@ const Post = (props) => {
           currentUser={currentUser}
           addLikeToPost={addLikeToPost}
           removeLikeFromPost={removeLikeFromPost}
+          setShowAllComments={setShowAllComments}
         />
-        <Replies replyIds={post.replies} />
+
+        <Replies replyIds={post.replies} showAllComments={showAllComments} />
+        <ShowMoreCommentsButton
+          showAllComments={showAllComments}
+          setShowAllComments={setShowAllComments}
+        />
       </Paper>
     </Box>
   );
