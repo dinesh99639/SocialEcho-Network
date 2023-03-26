@@ -8,7 +8,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import getLastPostedDaysBack from '../../Utils/getLastPostedDaysBack';
 
 const Contacts = (props) => {
-  const contacts = props.allUsers;
+  const contacts = Object.values(props.allUsers);
   const currentUser = props.currentUser;
 
   return (
@@ -23,9 +23,9 @@ const Contacts = (props) => {
       >
         <Typography
           sx={{
-            padding: '5px 0',
+            padding: '4px 0',
             textAlign: 'center',
-            backgroundColor: 'black',
+            backgroundColor: '#9100ff',
             color: 'white',
             width: '100%',
             borderRadius: '4px',
@@ -49,7 +49,7 @@ const Contacts = (props) => {
                     display: 'flex',
                     alignItems: 'center',
                     padding: '5px 13px',
-                    borderTop: '1px solid',
+                    borderTop: '1px solid lightgray',
                     columnGap: '10px',
                   }}
                 >

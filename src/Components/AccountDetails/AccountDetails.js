@@ -9,7 +9,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import getLastPostedDaysBack from '../../Utils/getLastPostedDaysBack';
 
 const AccountDetails = (props) => {
-  const { currentUser } = props;
+  const currentUser = props.users[props.currentUser.id];
 
   const lastPostedDaysBack = getLastPostedDaysBack(
     currentUser.lastPostedTimestamp,
@@ -31,7 +31,7 @@ const AccountDetails = (props) => {
           sx={{
             position: 'absolute',
             top: 0,
-            backgroundColor: 'black',
+            backgroundColor: '#9100ff',
             height: '72px',
             width: '100%',
             borderRadius: '4px',
@@ -55,8 +55,10 @@ const AccountDetails = (props) => {
           {currentUser.username}
         </Typography>
 
-        <Box sx={{ margin: '5px', width: '100%', textAlign: 'center' }}>
-          <Typography sx={{ margin: '10px' }}>Posts</Typography>
+        <Box sx={{ width: '100%', textAlign: 'center' }}>
+          <Typography fontSize="15px" sx={{ margin: '10px' }}>
+            Posts
+          </Typography>
           <Grid container>
             <Grid
               item
@@ -69,9 +71,9 @@ const AccountDetails = (props) => {
               }}
             >
               <Tooltip title="Posts" placement="top">
-                <VrpanoIcon sx={{ fontSize: '30px', color: '#4095ff' }} />
+                <VrpanoIcon sx={{ fontSize: 'px', color: '#4095ff' }} />
               </Tooltip>
-              <Typography fontSize="14px">{currentUser.totalPosts}</Typography>
+              <Typography fontSize="13px">{currentUser.totalPosts}</Typography>
             </Grid>
             <Grid
               item
@@ -83,9 +85,9 @@ const AccountDetails = (props) => {
               }}
             >
               <Tooltip title="Likes" placement="top">
-                <FavoriteIcon sx={{ fontSize: '30px', color: '#ff008c' }} />
+                <FavoriteIcon sx={{ fontSize: 'px', color: '#ff008c' }} />
               </Tooltip>
-              <Typography fontSize="14px">{currentUser.totalLikes}</Typography>
+              <Typography fontSize="13px">{currentUser.totalLikes}</Typography>
             </Grid>
             <Grid
               item
@@ -100,12 +102,12 @@ const AccountDetails = (props) => {
               <Tooltip title="Daily streak" placement="top">
                 <WhatshotIcon
                   sx={{
-                    fontSize: '30px',
+                    fontSize: 'px',
                     color: lastPostedDaysBack === 0 ? '#ffa500' : '#adadad',
                   }}
                 />
               </Tooltip>
-              <Typography fontSize="14px">
+              <Typography fontSize="13px">
                 {lastPostedDaysBack < 2 ? currentUser.dailyStreaks : 0}
               </Typography>
             </Grid>
@@ -117,9 +119,9 @@ const AccountDetails = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { application } = state;
+  const { application, database } = state;
 
-  return { currentUser: application.currentUser };
+  return { currentUser: application.currentUser, users: database.users };
 };
 
 export default connect(mapStateToProps)(AccountDetails);

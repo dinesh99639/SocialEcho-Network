@@ -12,6 +12,9 @@ import {
   MenuItem,
 } from '@mui/material';
 
+import database from '../Store/Reducers/database';
+import application from '../Store/Reducers/application';
+
 import SwitchAccount from './SwitchAccount/SwitchAccount';
 
 const Header = (props) => {
@@ -24,8 +27,9 @@ const Header = (props) => {
         <Toolbar
           style={{
             minHeight: '7vh',
-            backgroundColor: 'white',
-            color: '#5a5a5a',
+            maxHeight: '7vh',
+            backgroundColor: '#9100ff',
+            color: 'white',
           }}
         >
           <Typography
@@ -80,6 +84,16 @@ const Header = (props) => {
               >
                 Switch Account
               </MenuItem>
+
+              <MenuItem
+                onClick={() => {
+                  props.databaseReset();
+                  props.applicationReset();
+                  setAnchorEl(null);
+                }}
+              >
+                Reset data
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>
@@ -98,4 +112,10 @@ const mapStateToProps = (state) => {
 
   return { currentUser: application.currentUser };
 };
-export default connect(mapStateToProps)(Header);
+
+const mapDispatchToProps = {
+  databaseReset: database.actions.reset,
+  applicationReset: application.actions.reset,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

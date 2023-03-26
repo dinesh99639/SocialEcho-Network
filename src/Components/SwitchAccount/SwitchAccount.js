@@ -17,6 +17,8 @@ import database from '../../Store/Reducers/database';
 import application from '../../Store/Reducers/application';
 
 const SwitchAccount = (props) => {
+  const allUsers = Object.values(props.allUsers);
+
   const [selectedUser, setSelectedUser] = useState(null);
   const [newUser, setNewUser] = useState({
     username: '',
@@ -42,12 +44,14 @@ const SwitchAccount = (props) => {
   };
 
   const handleRegister = () => {
-    const existingUsers = props.allUsers.filter(
+    const existingUsers = allUsers.filter(
       (user) => user.username === newUser.username,
     );
     if (existingUsers.length === 0) {
-      props.addUser(newUser);
-      props.changeUser(newUser);
+      const userId = new Date().getTime();
+
+      props.addUser({ id: userId, ...newUser });
+      props.changeUser({ id: userId, ...newUser });
       snackbar.setSnack({
         open: true,
         type: 'success',
@@ -99,7 +103,7 @@ const SwitchAccount = (props) => {
 
             <Autocomplete
               disablePortal
-              options={props.allUsers}
+              options={allUsers}
               getOptionLabel={(option) => option?.name ?? ''}
               onChange={(e, values) => setSelectedUser(values)}
               renderInput={(params) => (

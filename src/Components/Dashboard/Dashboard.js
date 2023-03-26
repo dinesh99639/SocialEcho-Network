@@ -1,11 +1,12 @@
-import { Grid } from '@mui/material';
+import { Grid, Box } from '@mui/material';
 
 import AccountDetails from '../AccountDetails/AccountDetails';
+import PostsSection from '../PostsSection/PostsSection';
 import Contacts from '../Contacts/Contacts';
 
 const Dashboard = () => {
   return (
-    <>
+    <Box sx={{ overflow: 'auto', minHeight: '93vh', maxHeight: '93vh' }}>
       <Grid container>
         <Grid
           item
@@ -17,7 +18,7 @@ const Dashboard = () => {
           <AccountDetails />
         </Grid>
         <Grid item xs={12} sm={7} md={6}>
-          M
+          <PostsSection />
         </Grid>
         <Grid
           item
@@ -29,7 +30,7 @@ const Dashboard = () => {
           <Contacts />
         </Grid>
       </Grid>
-    </>
+    </Box>
   );
 };
 
