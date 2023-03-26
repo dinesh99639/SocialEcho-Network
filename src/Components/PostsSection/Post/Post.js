@@ -167,9 +167,9 @@ const PostActions = (props) => {
 
         <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <IconButton onClick={() => setShowAddComment((prev) => !prev)}>
-            <ReplyIcon sx={{ fontSize: '17px', scale: '1.1' }} />
+            <ReplyIcon sx={{ fontSize: '15px', scale: '1.3' }} />
           </IconButton>
-          <Typography fontSize="14px">Reply</Typography>
+          <Typography fontSize="13px">Reply</Typography>
         </Box>
       </Box>
 
